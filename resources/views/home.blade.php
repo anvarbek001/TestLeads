@@ -25,13 +25,102 @@
                                             data-bs-parent="#accordionPanelsStayOpenExample">
                                             <div class="accordion-body">
                                                 <div class="task_buttons">
-                                                    <div>Task count: </div>
                                                     <div>
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">add
-                                                            task</button>
+                                                        <h6>{{ $lead->note ?? 'Note not found' }}</h6>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-center">
+                                                        <div>Task count: {{ $lead->tasks_count }}</div>
+                                                        <div>
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-bs-toggle="modal" data-bs-target="#exampleModal">add
+                                                                task</button>
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-bs-toggle="modal" data-bs-target="#editLeadModal">edit
+                                                                lead</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteModalLead">delete
+                                                                lead</button>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Modal edit lead -->
+                                                <div class="modal fade" id="editLeadModal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLead" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content p-2">
+                                                            <form action="{{ route('lead.update', $lead) }}" method="POST">
+                                                                @method('PUT')
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLead">
+                                                                        Edit lead</h1>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row mb-3">
+                                                                        <label for="">Full name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="full_name" value="{{ $lead->full_name }}"
+                                                                            placeholder="Full name" required>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <label for="">Phone</label>
+                                                                        <input type="number" class="form-control"
+                                                                            name="phone" value="{{ $lead->phone }}"
+                                                                            placeholder="998901234567" required>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <label for="">Note</label>
+                                                                        <textarea cols="30" class="form-control" name="note">{{ $lead->note }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Save</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal delete -->
+                                                <div class="modal fade" id="deleteModalLead" tabindex="-1"
+                                                    aria-labelledby="editModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content p-2">
+                                                            <form action="{{ route('lead.delete', $lead) }}"
+                                                                method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="editModalLabel">
+                                                                        Delete lead</h1>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <h3>Do you really want to delete
+                                                                            ({{ $lead->full_name }})
+                                                                            ?</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">No</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Yes</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 @foreach ($lead->tasks as $key => $task)
                                                     <div class="task_body"
                                                         style="background: @if ($task->is_done == 0) red @else green @endif; color:white;">
@@ -56,7 +145,8 @@
 
                                                     <!-- Modal edit -->
                                                     <div class="modal fade" id="editModal{{ $task->id }}"
-                                                        tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                        tabindex="-1" aria-labelledby="editModalLabel"
+                                                        aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content p-2">
                                                                 <form action="{{ route('task.update', $task) }}"
@@ -102,7 +192,8 @@
 
                                                     <!-- Modal delete -->
                                                     <div class="modal fade" id="deleteModal{{ $task->id }}"
-                                                        tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                        tabindex="-1" aria-labelledby="editModalLabel"
+                                                        aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content p-2">
                                                                 <form action="{{ route('task.delete', $task) }}"

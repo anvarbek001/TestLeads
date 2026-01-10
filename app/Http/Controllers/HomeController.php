@@ -25,9 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $leads = Leads::where('user_id', Auth::user()->id)->paginate(5);
+        $leads = Leads::where('user_id', Auth::user()->id)->withCount('tasks')->latest()->paginate(5);
+
         return view('home', [
-            'leads' => $leads
+            'leads' => $leads,
         ]);
     }
 }

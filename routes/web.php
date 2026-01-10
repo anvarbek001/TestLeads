@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/task/store', 'TasksController@store')->name('task.store');
 Route::put('/task/update/{task}', 'TasksController@update')->name('task.update');
 Route::delete('/task/delete/{task}', 'TasksController@delete')->name('task.delete');
+
+Route::post('/lead/store', 'LeadsController@store')->name('lead.store');
+Route::put('/lead/update/{lead}', 'LeadsController@update')->name('lead.update');
+Route::delete('/lead/delete/{lead}', 'LeadsController@delete')->name('lead.delete');

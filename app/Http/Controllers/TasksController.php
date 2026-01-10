@@ -51,7 +51,7 @@ class TasksController extends Controller
 
         $task->save();
 
-        return redirect()->route('home')->with('success', "Data saved successfully");
+        return redirect()->route('home')->with('success', "Data updated successfully");
     }
 
     public function delete(Tasks $task)

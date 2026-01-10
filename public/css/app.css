@@ -11056,7 +11056,6 @@ a.text-dark:focus {
 }
 
 .task_buttons {
-    display: flex;
     justify-content: space-between;
     padding: 5px;
 }

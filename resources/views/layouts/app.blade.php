@@ -54,6 +54,50 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item" style="margin: auto;">
+                                <button type="button" class="btn btn-outline-primary"
+                                    style="border:none; border-radius:10px; padding:5px;" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Add
+                                    lead</button>
+
+                                <!-- Modal store lead -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content p-2">
+                                            <form action="{{ route('lead.store') }}" method="POST">
+                                                @csrf
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add lead</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row mb-3">
+                                                        <label for="">Full name</label>
+                                                        <input type="text" class="form-control" name="full_name"
+                                                            placeholder="Full name" required>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="">Phone</label>
+                                                        <input type="number" class="form-control" name="phone"
+                                                            placeholder="998901234567" required>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="">Note</label>
+                                                        <textarea cols="30" class="form-control" name="note"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

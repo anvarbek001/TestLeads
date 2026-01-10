@@ -20,6 +20,6 @@ class Tasks extends Model
 
     public function lead()
     {
-        return $this->belongsTo(Leads::class);
+        return $this->belongsTo(Leads::class, 'lead_id');
     }
 }
